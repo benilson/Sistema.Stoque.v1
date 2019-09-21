@@ -1,0 +1,44 @@
+﻿@model Sistema.Stoque.v1.Dominio.Usuario
+
+@{
+    ViewBag.Title = "LoginUsuario";
+}
+<br />
+<h2>Login Usuario</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4></h4>
+        <hr />
+
+        <p style="color:red">@ViewBag.Validacoes</p>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NomeUsuario)
+
+            @Html.EditorFor(model => model.NomeUsuario, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.NomeUsuario, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SenhaUsuario)
+
+            @Html.PasswordFor(model => model.SenhaUsuario, new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Logar" class="btn btn-success" />
+
+        </div>
+</div>
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

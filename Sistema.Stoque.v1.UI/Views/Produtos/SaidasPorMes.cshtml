@@ -1,0 +1,30 @@
+﻿@model Sistema.Stoque.v1.Dominio.Produtos
+@{
+    ViewBag.Title = "Saidas Por Mês";
+}
+<br />
+<br />
+<br />
+<h2>Saidas Por Mes</h2>
+
+<table class="table table-responsive table-striped">
+    <thead>
+        <tr>
+            <th>Meses</th>
+            <th>Quantidades de Produtos</th>
+        </tr>
+
+    </thead>
+    <tbody>
+        @{
+            for (int i = 0; i < ViewBag.meses.Length; i++)
+            {
+                <tr>
+                    <td>@Html.ActionLink(@ViewBag.meses[i] as string, "PesquisarSaidasPorMes", new { id = (i) })</td>
+                    <td>@ViewBag.QuantiProd[i]</td>
+                </tr>
+            }
+
+        }
+    </tbody>
+</table>

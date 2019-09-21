@@ -1,0 +1,64 @@
+﻿@model IEnumerable<Sistema.Stoque.v1.Dominio.Entradas>
+
+@{
+    ViewBag.Title = "Pesquisar Entradas Por Mês";
+}
+<br />
+<br />
+<br />
+
+<h2>Todas As Entradas do Mes de @ViewBag.Mes Desde o Ano de @ViewBag.PrimeiroAno ate @DateTime.Now.Year </h2>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Data Entrada
+            </th>
+            <th>
+                Hora Entrada
+            </th>
+            <th>
+                Nome Usuario
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NomeProduto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantidade)
+            </th>
+            <th>
+                Preço
+            </th>
+            <th>
+                Imagem
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataEntrada)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HoraEntrada)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NomeUser)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NomeProduto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantidade)
+                </td>
+                <td>
+                    <img src='@Url.Content("~/ImgProdutos/" + item.Imagem)' alt="" width="50" height="50" />
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Sistema.Stoque.v1.Dominio.Saidas>
+
+@{
+    ViewBag.Title = "Pesquisar Saidas Por Mês";
+}
+<br />
+<br />
+<br />
+<h2>Todas As Saidas do Mes de @ViewBag.Mes Desde o Ano de @ViewBag.PrimeiroAno ate @DateTime.Now.Year</h2>
+
+
+<table class="table table-responsive">
+    <thead>
+        <tr>
+            <th>
+               Hora Saida
+            </th>
+            <th>
+               Nome Usuario
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NomeProduto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantidade)
+            </th>
+            <th>
+                Preço
+            </th>
+            <th>
+                Imagem
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HoraSaida)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NomeUser)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NomeProduto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantidade)
+                </td>
+                <td>
+                    <img src='@Url.Content("~/ImgProdutos/" + item.Imagem)' alt="" width="50" height="50" />
+                </td>
+            </tr>
+        }
+   </tbody>
+</table>

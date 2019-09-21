@@ -1,0 +1,97 @@
+﻿  @using Sistema.Stoque.v1.Dominio
+
+@{
+    var usuario = Session["usuario"] as Usuario;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Gestão de Stocks</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+              @Html.ActionLink("STOCK-GEST", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    @if (usuario != null)
+                    {
+                        switch (usuario.PerfilUsuario)
+                        {
+                            case "Admin":
+                                <li>@Html.ActionLink("Produtos", "Listarprodutos", "Produtos")</li>
+                                <li>@Html.ActionLink("Entradas", "ListarProdutosEntrados", "Produtos")</li>
+                                <li>@Html.ActionLink("Entradas Mes", "EntradasPorMes", "Produtos")</li>
+                                <li>@Html.ActionLink("Saidas", "ListarProdutosSaidos", "Produtos")</li>
+                                <li>@Html.ActionLink("Saidas Mes", "SaidasPorMes", "Produtos")</li>
+                                break;
+                            case "usuarioCadastro":
+                                <li>@Html.ActionLink("Produtos", "Listarprodutos", "Produtos")</li>
+                                <li>@Html.ActionLink("Entradas", "ListarProdutosEntrados", "Produtos")</li>
+                                <li>@Html.ActionLink("Entradas Mes", "EntradasPorMes", "Produtos")</li>
+                                break;
+                            case "usuarioSaida":
+                                <li>@Html.ActionLink("Produtos", "Listarprodutos", "Produtos")</li>
+                                <li>@Html.ActionLink("Saidas", "ListarProdutosSaidos", "Produtos")</li>
+                                <li>@Html.ActionLink("Saidas Mes", "SaidasPorMes", "Produtos")</li>
+                                break;
+
+                        }
+                        <li>@Html.ActionLink("Alterar Senha", "Editar", "Usuario")</li>
+                        <li></li>
+                            <li style="padding-left:250px;">
+                                <br />
+                                @if (usuario.urlFoto != "")
+                                {
+                                    <img src='@Url.Content("~/ImgProdutos/" + usuario.urlFoto)' width="40" height="40" class="img-circle" />
+                                }
+                                else
+                                {
+                             
+                                    <img src='@Url.Content("~/ImgProdutos/user.PNG")' width="40" height="40" class="img-circle" />
+                                }
+
+                            </li>
+                            <li>
+                              @Html.ActionLink(usuario.NomeUsuario, "Editar", "Usuario")
+                            </li>
+                            <li class="btn btn-danger">
+                              @Html.ActionLink("Sair", "Logout", "Usuario")
+                            </li>
+                    }
+                    else
+                    {
+                        <li class="btn btn-danger">
+                          @Html.ActionLink("Login", "LoginUsuario", "Usuario")
+                        </li>
+                    }
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Gestão de Stocks</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,148 @@
+﻿@model IEnumerable<Sistema.Stoque.v1.Dominio.Entradas>
+
+@{
+    ViewBag.Title = "Lista de Entrada de Produtos";
+}
+<br />
+<br />
+<br />
+<h2>Lista de Entradas de Produtos @ViewBag.todasEntradasDoMesDe </h2>
+<p>
+    @using (Html.BeginForm())
+    {
+        <table>
+            <tr>
+                <td>
+                    <input type="text" name="nome" placeholder="Nome do produto" class="form-control" />
+                </td>
+                <td>
+                    <select name="optSector" class="form-control">
+                        <option selected value="">Categoria</option>
+                        <option value="Higiene">Higiene</option>
+                        <option value="Escritorio">Escritorio</option>
+                        <option value="Consumo">Consumo</option>
+                        <option value="Suprimentos">Suprimentos</option>
+                        <option value="Eletronicos">Eletronicos</option>
+                    </select>
+                </td>
+                <td>
+
+                    @Html.AntiForgeryToken()
+                    <select name="mes" class="form-control">
+                        <option selected value="">Meses</option>
+                        @if (TempData["Meses"] != null)
+                        {
+                            var meses1 = (string[])TempData["Meses"];
+
+                            for (var j = 1; j < meses1.Length; j++)
+                            {
+                                <option value=@j>@meses1[j]</option>
+                            }
+
+
+                        }
+                    </select>
+                </td>
+                <td>
+                    <select name="ano" class="form-control">
+                        <option selected value="">Anos</option>
+                        @if (ViewBag.PrimeiroAno != null)
+                        {
+                            for (int j = ViewBag.PrimeiroAno; j <= ViewBag.ultimoAno; j++)
+                            {
+                                <option value=@j>@j</option>
+                            }
+                        }
+                    </select>
+                </td>
+                <td>
+                    <button type="submit" value="" class="btn btn-primary pull-right h2">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </button>
+                </td>
+            </tr>
+        </table>
+
+    }
+</p>
+@{
+
+    if (ViewBag.Nome != null && ViewBag.Nome != "")
+    {
+        <br />
+        <b>Produto Pesquisado: </b>@ViewBag.Nome<br />
+    }
+
+    if (ViewBag.OptSector != null && ViewBag.OptSector != "")
+    {
+        <b>Categoria Pesquisada: </b>@ViewBag.OptSector<<br />
+    }
+
+    if (ViewBag.Mes != null && ViewBag.Mes != "")
+    {
+        <b>Mes Pesquisado: </b>@ViewBag.Mes<br />
+    }
+
+    if (ViewBag.Ano != null && ViewBag.Ano != "")
+    {
+        <b>Ano Pesquisado: </b>@ViewBag.Ano<br />
+    }
+    <br />
+}
+
+
+<table class="table">
+    <thead>
+        <tr style="background-color:#B30F20; color:white">
+            <th>
+                Data
+            </th>
+            <th>Hora</th>
+
+            <th>Usuario</th>
+            <th>
+                @Html.DisplayNameFor(model => model.NomeProduto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantidade)
+            </th>
+            <th>
+               Preço
+            </th>
+            <th>
+                Imagem
+            </th>
+         <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+
+            <tr>
+                
+                <td>
+                   @Html.DisplayFor(modelItem => item.DataEntrada)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HoraEntrada)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NomeUser)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NomeProduto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantidade)
+                </td>
+                <td>
+                    <img src='@Url.Content("~/ImgProdutos/" + item.Imagem)' alt="" width="50" height="50" />
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "EditarProdutoEntrada", new { id = item.Id_EntradaProd })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

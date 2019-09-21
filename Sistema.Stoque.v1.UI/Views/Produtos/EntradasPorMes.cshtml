@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewBag.Title = "Entradas Por Mês";
+}
+
+<h2>Entradas Por Mes</h2>
+
+<table class="table table-responsive">
+    <thead>
+    <tr>
+        <th>Meses</th>
+        <th>Quantidades de Produtos</th>
+    </tr>
+    </thead>
+    <tbody>
+        @{
+            for (var i = 0; i < ViewBag.meses.Length; i++)
+            {
+                <tr>
+                    <td>@Html.ActionLink(@ViewBag.meses[i] as string, "PesquisarEntradasPorMes", new { id = (i) })</td>
+                    <td>@ViewBag.QuantiProd[i]</td>
+                </tr>
+            }
+
+        }
+    </tbody>
+</table>
+

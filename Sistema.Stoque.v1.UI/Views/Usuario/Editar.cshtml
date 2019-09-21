@@ -1,0 +1,67 @@
+﻿@model Sistema.Stoque.v1.Dominio.Usuario
+
+@{
+    ViewBag.Title = "Editar";
+}
+
+<h2>Editar</h2>
+
+
+@using (Html.BeginForm("Editar", "Usuario"))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <br />
+        <br />
+        <h4>Usuario</h4>
+        <hr />
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        @Html.HiddenFor(model => model.Id_Usuario)
+
+        @Html.HiddenFor(model => model.NomeUsuario)
+
+        @Html.HiddenFor(model => model.telfUsuario)
+
+        @Html.HiddenFor(model => model.PerfilUsuario)
+
+        @Html.HiddenFor(model => model.urlFoto)
+
+        <div class="form-group">
+            <b>Senha Atual</b>
+            <input type="password" name="pass" class="form-control" />
+            <span style="color:red;">@ViewBag.Erro</span>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SenhaUsuario)
+
+            @Html.PasswordFor(model => model.SenhaUsuario, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.SenhaUsuario, "", new { @class = "text-danger" })
+
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.senhaRepetida)
+
+            @Html.PasswordFor(model => model.senhaRepetida, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.senhaRepetida, "", new { @class = "text-danger" })
+
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Salvar" class="btn btn-default" />
+        </div>
+    </div>
+}
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

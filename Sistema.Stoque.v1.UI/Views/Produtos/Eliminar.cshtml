@@ -1,0 +1,50 @@
+﻿@model Sistema.Stoque.v1.Dominio.Produtos
+<br />
+<br />
+<br />
+<br />
+<h3>Tem Certeza que deseja Eliminar este Produto ?</h3>
+<div>
+    <h4>Produto</h4>
+    <hr />
+    <table>
+        
+            @Html.HiddenFor(model => model.Id_produto)
+        <tr>
+            <td>
+                <img src='@Url.Content("~/ImgProdutos/" + Model.Imagem)' alt="" width="100" height="100" />
+            </td>
+            <td>
+
+            </td>
+       </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NomeProduto)
+            </th>
+
+            <td>
+                @Html.DisplayFor(model => model.NomeProduto)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantidade)
+            </th>
+
+            <td>
+                @Html.DisplayFor(model => model.Quantidade)
+            </td>
+        </tr>
+       
+    </table>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Eliminar" class="btn btn-default" /> |
+            @Html.ActionLink("Voltar", "Listarprodutos")
+        </div>
+    }
+</div>

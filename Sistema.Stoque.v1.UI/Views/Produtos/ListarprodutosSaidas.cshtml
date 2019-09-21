@@ -1,0 +1,91 @@
+﻿@model IEnumerable<Sistema.Stoque.v1.Dominio.Saidas>
+
+@{
+    ViewBag.Title = "Listar produtos Entradas";
+}
+<br />
+<br />
+<br />
+<h3 class="page-header">Saidas do Seguinte produto</h3>
+
+    <div class="row">
+        <div class="col-sm-6 col-md-3">
+            <div class="thumbnail">
+                <a href="#" class="thumbnail">
+                    <img src='@Url.Content("~/ImgProdutos/" + @ViewBag.Imagem)' alt="" /><br />
+                </a>
+                <div class="caption">
+                    <b>Quantidade Atual :</b>@ViewBag.Quantidadeatual
+                    <p>
+                        @Html.ActionLink("Cadastrar Saida deste Produto", "DiminuirProdutos", new { id = @ViewBag.idProduto }, new { @class = "btn btn-primary btn-sm" })
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+
+    <table class="table">
+        <thead>
+            <tr style="background-color:#B30F20; color:white">
+                <th>
+                    Data Saida
+                </th>
+                <th>
+                    Hora Saida
+                </th>
+                <th>
+                    Nome Usuario
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Quantidade)
+                </th>
+                <th>
+                    Preço
+                </th>
+                <th>
+                    Nome do Produto
+                </th>
+                <th>
+                    Sector
+                </th>
+                <th>
+                    Data da Saida
+                </th>
+                <th>
+
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DataSaida)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.HoraSaida)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NomeUser)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Quantidade)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NomeProduto)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Sector)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DataSaida)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Editar", "EditarProdutoSaida", new { id = item.Id_saidasProd }, new { @class = "btn btn-info btn-xs" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>

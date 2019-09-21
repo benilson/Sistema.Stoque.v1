@@ -1,0 +1,74 @@
+﻿@model IEnumerable<Sistema.Stoque.v1.Dominio.Usuario>
+
+@{
+    ViewBag.Title = "Lista De Usuarios";
+}
+
+<h2>ListaDeUsuarios</h2>
+
+<p>
+    @Html.ActionLink("Criar Novo Usuario", "Criar")
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Id_Usuario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NomeUsuario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PerfilUsuario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.telfUsuario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.urlFoto)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    
+@foreach (var item in Model) {
+    <tbody>
+        <tr>
+            <td>
+                @if (item.urlFoto != "")
+                {
+                    <img src='@Url.Content("~/ImgProdutos/" + item.urlFoto)' width="80" height="80" class="img-circle" />
+                }
+                else
+                {
+
+                    <img src='@Url.Content("~/ImgProdutos/user.PNG")' width="80" height="80" class="img-circle" />
+                }
+
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id_Usuario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NomeUsuario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PerfilUsuario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.telfUsuario)
+            </td>
+
+            <td>
+                @Html.ActionLink("Editar", "Editar", new { id = item.Id_Usuario }) |
+                @Html.ActionLink("Eliminar", "Eliminar", new { id = item.Id_Usuario })
+            </td>
+        </tr>
+    </tbody>
+   
+}
+
+</table>
